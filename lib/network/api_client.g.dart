@@ -10,7 +10,7 @@ part of 'api_client.dart';
 
 class _ApiClient implements ApiClient {
   _ApiClient(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??= 'http://localhost:3001';
+    baseUrl ??= 'http://192.168.0.13:3001';
   }
 
   final Dio _dio;
@@ -42,6 +42,46 @@ class _ApiClient implements ApiClient {
           _result.data!
               .map((dynamic i) => Court.fromJson(i as Map<String, dynamic>))
               .toList();
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<SearchCourtResponse> searchCourts({
+    required int start,
+    required int end,
+    int? dayStart,
+    int? dayEnd,
+    required int matchType,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'start': start,
+      r'end': end,
+      r'dayStart': dayStart,
+      r'dayEnd': dayEnd,
+      r'matchType': matchType,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<SearchCourtResponse>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/court/search',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late SearchCourtResponse _value;
+    try {
+      _value = SearchCourtResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

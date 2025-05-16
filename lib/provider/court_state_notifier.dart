@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import '../model/court.dart';
 import '../network/api_client.dart';
 import '../network/dio_client.dart';
@@ -20,6 +21,23 @@ class CourtNotifier extends StateNotifier<List<Court>> {
   Future<void> fetchCourts() async {
     final courts = await client.getCourts();
     state = [...state, ...courts];
+  }
+
+  Future<void> fetchSearchCourts({
+    required int startTime,
+    required int endTime,
+    bool searchBetweenCorver = false,
+    int? dayStart, // ⚠️ 선택
+    int? dayEnd,
+  }) async {
+    final results = await client.searchCourts(
+      start: startTime,
+      end: endTime,
+      matchType: searchBetweenCorver ? 1 : 2,
+      dayStart: dayStart,
+      dayEnd: dayEnd,
+    );
+    state = results.data;
   }
 
   void updateCourtName(int id, String newName) {
