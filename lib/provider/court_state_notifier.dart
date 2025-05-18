@@ -1,5 +1,4 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import '../model/court.dart';
 import '../network/api_client.dart';
 import '../network/dio_client.dart';

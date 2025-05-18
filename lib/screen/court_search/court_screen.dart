@@ -1,15 +1,11 @@
-import 'package:court/model/court.dart';
 import 'package:court/screen/court_search/widgets/between_search_checkbox.dart';
 import 'package:court/screen/court_search/widgets/court_list.dart';
 import 'package:court/screen/court_search/widgets/date_selector.dart';
-import 'package:court/screen/court_search/widgets/time_availability_bar.dart';
 import 'package:court/screen/court_search/widgets/time_range_selector.dart';
 import 'package:court/screen/widgets/positive_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../provider/court_state_notifier.dart';
-import '../../provider/selected_court_provider.dart';
-import 'widgets/time_tables.dart';
 
 class CourtScreen extends ConsumerStatefulWidget {
   const CourtScreen({super.key});
@@ -28,8 +24,6 @@ class _CourtScreenState extends ConsumerState<CourtScreen> {
   Widget build(BuildContext context) {
     final courts = ref.watch(courtNotifierProvider);
     final courtsNotifier = ref.read(courtNotifierProvider.notifier);
-
-    final selectedNotifier = ref.read(selectedCourtProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Court List')),

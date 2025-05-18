@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "192256508917",
+    "project_id": "court-infos",
+    "storage_bucket": "court-infos.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:192256508917:android:0cafbd7f912bcf5a0d16bc",
+        "android_client_info": {
+          "package_name": "com.hj.court"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCu6oppph9stKnMcjoapkk59PIt0U3H7IY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
