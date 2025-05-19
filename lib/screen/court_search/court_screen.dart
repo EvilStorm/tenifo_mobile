@@ -3,6 +3,7 @@ import 'package:court/screen/court_search/widgets/court_list.dart';
 import 'package:court/screen/court_search/widgets/date_selector.dart';
 import 'package:court/screen/court_search/widgets/time_range_selector.dart';
 import 'package:court/screen/widgets/positive_button.dart';
+import 'package:court/utils/size_scale.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../provider/court_state_notifier.dart';
@@ -26,7 +27,15 @@ class _CourtScreenState extends ConsumerState<CourtScreen> {
     final courtsNotifier = ref.read(courtNotifierProvider.notifier);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Court List')),
+      appBar: AppBar(
+        title: Text(
+          '코트 정보',
+          style: SizeScale.instance.textScaleStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
       body: Column(
         children: [
           SingleChildScrollView(
@@ -38,7 +47,7 @@ class _CourtScreenState extends ConsumerState<CourtScreen> {
                     selectedRange = selectedDate;
                   },
                 ),
-                SizedBox(width: 18),
+                SizedBox(width: SizeScale.instance.basicSpace),
                 TimeSelector(
                   onChanged: (start, end) {
                     startTime = start;
@@ -46,13 +55,13 @@ class _CourtScreenState extends ConsumerState<CourtScreen> {
                     // 시간 기반 필터 처리 가능
                   },
                 ),
-                SizedBox(width: 18),
+                SizedBox(width: SizeScale.instance.basicSpace),
                 BetweenSearchCheckbox(
                   onChanged: (value) {
                     searchBetweenCorver = !value;
                   },
                 ),
-                SizedBox(width: 18),
+                SizedBox(width: SizeScale.instance.basicSpaceAddHalf),
                 PositiveButton(
                   text: '검색',
                   onPressed: () {
@@ -76,14 +85,16 @@ class _CourtScreenState extends ConsumerState<CourtScreen> {
                 final court = courts[index];
 
                 return Container(
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 8,
+                  margin: EdgeInsets.symmetric(
+                    horizontal: SizeScale.instance.basicSpaceAddHalf,
+                    vertical: SizeScale.instance.basicSpace,
                   ),
-                  padding: const EdgeInsets.all(12),
+                  padding: EdgeInsets.all(SizeScale.instance.basicSpaceAddHalf),
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(
+                      SizeScale.instance.basicSpaceAddHalf,
+                    ),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black12,
@@ -99,22 +110,21 @@ class _CourtScreenState extends ConsumerState<CourtScreen> {
                         contentPadding: EdgeInsets.zero,
                         title: Text(
                           court.name,
-                          style: const TextStyle(
+                          style: SizeScale.instance.textScaleStyle(
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            fontSize: 22,
                             color: Colors.black87,
                           ),
                         ),
                         subtitle: Text(
                           court.address,
-                          style: const TextStyle(
+                          style: SizeScale.instance.textScaleStyle(
                             fontWeight: FontWeight.normal,
-                            fontSize: 16,
-                            color: Colors.black87,
+                            fontSize: 14,
+                            color: Colors.black45,
                           ),
                         ),
                       ),
-                      const SizedBox(height: 8),
                       CourtListView(courts: court.cortReservationInfos),
                     ],
                   ),

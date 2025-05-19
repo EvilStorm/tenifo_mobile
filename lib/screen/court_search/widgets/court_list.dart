@@ -1,3 +1,4 @@
+import 'package:court/utils/size_scale.dart';
 import 'package:flutter/material.dart';
 
 import '../../../model/court.dart';
@@ -35,11 +36,17 @@ class _CourtListViewState extends State<CourtListView>
         final isOpen = openedIndex == index;
 
         return Container(
-          margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-          padding: const EdgeInsets.all(12),
+          margin: EdgeInsets.symmetric(
+            vertical: SizeScale.instance.basicSpace,
+            horizontal: SizeScale.instance.basicSpaceAddHalf,
+          ),
+          padding: EdgeInsets.symmetric(
+            horizontal: SizeScale.instance.basicSpace * 2,
+            vertical: SizeScale.instance.basicSpace / 2,
+          ),
           decoration: BoxDecoration(
             color: bgColors[index % bgColors.length],
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(SizeScale.instance.basicSpace),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,9 +61,9 @@ class _CourtListViewState extends State<CourtListView>
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                       softWrap: false,
-                      style: const TextStyle(
+                      style: SizeScale.instance.textScaleStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 20,
+                        fontSize: 16,
                         color: Colors.black87,
                       ),
                     ),
@@ -67,7 +74,14 @@ class _CourtListViewState extends State<CourtListView>
                         openedIndex = isOpen ? null : index;
                       });
                     },
-                    child: Text(isOpen ? '닫기' : '상세 보기'),
+                    child: Text(
+                      isOpen ? '닫기' : '상세 보기',
+                      style: SizeScale.instance.textScaleStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                        color: Colors.blueGrey,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -77,12 +91,14 @@ class _CourtListViewState extends State<CourtListView>
                 maintainState: true,
                 maintainAnimation: true,
                 child: Container(
-                  margin: const EdgeInsets.only(top: 8),
-                  padding: const EdgeInsets.all(12),
+                  margin: EdgeInsets.only(top: SizeScale.instance.basicSpace),
+                  padding: EdgeInsets.all(SizeScale.instance.basicSpaceAddHalf),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(color: Colors.grey.shade300),
-                    borderRadius: BorderRadius.circular(6),
+                    borderRadius: BorderRadius.circular(
+                      SizeScale.instance.basicSpace,
+                    ),
                   ),
                   child: TimeTables(data: cort.timeInfo),
                 ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../utils/size_scale.dart';
+
 class TimeAvailabilityBar extends StatelessWidget {
   final List<int> availableTimes;
 
@@ -12,18 +14,23 @@ class TimeAvailabilityBar extends StatelessWidget {
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+      padding: EdgeInsets.symmetric(
+        horizontal: SizeScale.instance.basicSpace,
+        vertical: SizeScale.instance.basicSpace / 2,
+      ),
       child: Row(
         children:
             hours.map((hour) {
               final isAvailable = availableTimes.contains(hour);
               return Container(
                 width: 44,
-                margin: const EdgeInsets.symmetric(horizontal: 2),
-                padding: const EdgeInsets.all(6),
+                margin: const EdgeInsets.symmetric(horizontal: 1),
+                padding: EdgeInsets.all(SizeScale.instance.basicSpace / 2),
                 decoration: BoxDecoration(
                   color: isAvailable ? Colors.green : Colors.grey.shade300,
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(
+                    SizeScale.instance.basicSpace,
+                  ),
                   border: Border.all(color: Colors.black12),
                 ),
                 child: Column(
@@ -31,7 +38,7 @@ class TimeAvailabilityBar extends StatelessWidget {
                   children: [
                     Text(
                       '$hour',
-                      style: TextStyle(
+                      style: SizeScale.instance.textScaleStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
                         color: isAvailable ? Colors.white : Colors.black45,

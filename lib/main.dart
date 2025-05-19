@@ -1,5 +1,7 @@
+import 'package:court/utils/size_scale.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'screen/court_search/court_screen.dart';
@@ -16,7 +18,12 @@ void main() async {
   );
 
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: firebaseOptions);
+  if (kIsWeb) {
+    await Firebase.initializeApp(options: firebaseOptions);
+  } else {
+    await Firebase.initializeApp();
+  }
+
   runApp(ProviderScope(child: MyApp()));
 }
 
@@ -27,6 +34,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // if (!SizeScale.isInitialized) {
+    SizeScale.instance.init(context);
+    // }
+
     return MaterialApp(
       navigatorObservers: [FirebaseAnalyticsObserver(analytics: analytics)],
       home: CourtScreen(),

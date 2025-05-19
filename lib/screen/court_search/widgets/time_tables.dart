@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../model/court.dart';
+import '../../../utils/size_scale.dart';
 import 'time_availability_bar.dart';
 
 class TimeTables extends StatelessWidget {
@@ -14,18 +15,20 @@ class TimeTables extends StatelessWidget {
       children:
           data.map((dayInfo) {
             return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 6),
+              padding: EdgeInsets.symmetric(
+                vertical: SizeScale.instance.basicSpace,
+              ),
               child: Row(
                 children: [
                   Text(
                     '${dayInfo.day}일',
-                    style: const TextStyle(
+                    style: SizeScale.instance.textScaleStyle(
+                      fontSize: 12,
                       fontWeight: FontWeight.bold,
-                      fontSize: 16,
                       color: Colors.black87,
                     ),
                   ),
-                  const SizedBox(width: 18),
+                  SizedBox(width: SizeScale.instance.basicSpace),
                   Expanded(
                     child: TimeAvailabilityBar(availableTimes: dayInfo.times),
                   ),

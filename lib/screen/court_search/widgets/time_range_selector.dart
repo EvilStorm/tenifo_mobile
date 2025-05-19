@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../../../utils/size_scale.dart';
+
 class TimeSelector extends StatefulWidget {
   final void Function(int startHour, int endHour)? onChanged;
 
@@ -55,31 +57,44 @@ class _TimeSelectorState extends State<TimeSelector> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const Text("시작:"),
-        const SizedBox(width: 8),
+        Text("시작:", style: SizeScale.instance.textScaleStyle(fontSize: 14)),
+        SizedBox(width: SizeScale.instance.basicSpace),
         DropdownButton<int>(
           value: startHour,
+          isDense: true,
           items:
               hours
                   .map(
-                    (hour) =>
-                        DropdownMenuItem(value: hour, child: Text('$hour시')),
+                    (hour) => DropdownMenuItem(
+                      value: hour,
+                      child: Text(
+                        '$hour시',
+                        style: SizeScale.instance.textScaleStyle(fontSize: 14),
+                      ),
+                    ),
                   )
                   .toList(),
           onChanged: (value) {
             if (value != null) _onStartChanged(value);
           },
         ),
-        const SizedBox(width: 24),
-        const Text("종료:"),
-        const SizedBox(width: 8),
+
+        SizedBox(width: SizeScale.instance.basicSpace),
+        Text("종료:", style: SizeScale.instance.textScaleStyle(fontSize: 14)),
+        SizedBox(width: SizeScale.instance.basicSpace),
         DropdownButton<int>(
           value: endHour,
+          isDense: true,
           items:
               hours
                   .map(
-                    (hour) =>
-                        DropdownMenuItem(value: hour, child: Text('$hour시')),
+                    (hour) => DropdownMenuItem(
+                      value: hour,
+                      child: Text(
+                        '$hour시',
+                        style: SizeScale.instance.textScaleStyle(fontSize: 14),
+                      ),
+                    ),
                   )
                   .toList(),
           onChanged: (value) {

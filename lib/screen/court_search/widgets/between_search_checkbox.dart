@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../utils/size_scale.dart';
+
 class BetweenSearchCheckbox extends StatefulWidget {
   final bool initialValue;
   final ValueChanged<bool> onChanged;
@@ -32,6 +34,8 @@ class _BetweenSearchCheckboxState extends State<BetweenSearchCheckbox> {
         children: [
           Checkbox(
             value: isChecked,
+            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            visualDensity: VisualDensity.compact,
             onChanged: (value) {
               setState(() {
                 isChecked = value ?? false;
@@ -39,7 +43,7 @@ class _BetweenSearchCheckboxState extends State<BetweenSearchCheckbox> {
               widget.onChanged(isChecked);
             },
           ),
-          const Text('사이 검색'),
+          Text('사이 검색', style: SizeScale.instance.textScaleStyle(fontSize: 14)),
         ],
       ),
     );

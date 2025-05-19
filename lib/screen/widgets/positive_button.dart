@@ -1,3 +1,4 @@
+import 'package:court/utils/size_scale.dart';
 import 'package:flutter/material.dart';
 
 class PositiveButton extends StatelessWidget {
@@ -17,14 +18,19 @@ class PositiveButton extends StatelessWidget {
       },
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.blueAccent,
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        padding: EdgeInsets.symmetric(
+          horizontal: SizeScale.instance.basicSpaceAddHalf,
+          vertical: SizeScale.instance.basicSpace,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(SizeScale.instance.basicSpace),
+        ),
       ),
       child: Text(
         text,
-        style: TextStyle(
+        style: SizeScale.instance.textScaleStyle(
+          fontSize: 14,
           fontWeight: FontWeight.bold,
-          fontSize: 16,
           color: Colors.white,
         ),
       ),
